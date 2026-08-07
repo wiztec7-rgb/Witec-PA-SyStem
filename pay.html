@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WIZTEC Sound System - Payment & Booking</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background:url("Sound1.jpg") center center/cover no-repeat fixed;
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:30px;
+        }
+
+        .container{
+            width:100%;
+            max-width:600px;
+            background:#1e293b;
+            color:#fff;
+            padding:30px;
+            border-radius:12px;
+            box-shadow:0 10px 25px rgba(0,0,0,.35);
+        }
+
+        h2{
+            text-align:center;
+            margin-bottom:10px;
+        }
+
+        p{
+            text-align:center;
+            margin-bottom:25px;
+            color:#cbd5e1;
+        }
+
+        label{
+            display:block;
+            margin-top:15px;
+            margin-bottom:6px;
+            font-weight:bold;
+        }
+
+        input,
+        select,
+        textarea{
+            width:100%;
+            padding:12px;
+            border:none;
+            border-radius:8px;
+            font-size:15px;
+            margin-bottom:10px;
+        }
+
+        textarea{
+            resize:vertical;
+            min-height:90px;
+        }
+
+        .payment-box{
+            margin-top:20px;
+            padding:15px;
+            background:#334155;
+            border-radius:8px;
+        }
+
+        .payment-box h3{
+            margin-bottom:10px;
+        }
+
+        .payment-box p{
+            text-align:left;
+            margin-bottom:10px;
+        }
+
+        .note{
+            color:#fbbf24;
+            font-size:14px;
+        }
+
+        button{
+            width:100%;
+            margin-top:20px;
+            padding:14px;
+            border:none;
+            border-radius:8px;
+            background:orange;
+            color:#000;
+            font-size:17px;
+            font-weight:bold;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#ffb100;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>WIZTEC Sound System</h2>
+
+<p>
+Complete the booking form below and submit your payment information to confirm your booking.
+</p>
+
+<form id="bookingForm">
+
+<label for="name">Full Name</label>
+<input
+type="text"
+id="name"
+name="name"
+placeholder="Enter your full name"
+required>
+
+<label for="phone">Mobile Number</label>
+<input
+type="tel"
+id="phone"
+name="phone"
+placeholder="+232 XX XXX XXXX"
+required>
+
+<label for="email">Email Address</label>
+<input
+type="email"
+id="email"
+name="email"
+placeholder="example@email.com"
+required>
+
+<label for="service">Event Type</label>
+<select
+id="service"
+name="service"
+required>
+
+<option value="">Select Event Type</option>
+
+<option value="Wedding">Wedding</option>
+
+<option value="Birthday Party">Birthday Party</option>
+
+<option value="Church Program">Church Program</option>
+
+<option value="Outdoor Event">Outdoor Event</option>
+
+<option value="Conference">Conference</option>
+
+<option value="Concert">Concert</option>
+
+<option value="Funeral">Funeral</option>
+
+<option value="Other">Other</option>
+
+</select>
+
+<label for="package">Package</label>
+
+<select
+id="package"
+name="package">
+
+<option value="">Select Package</option>
+
+<option>Basic Package</option>
+
+<option>Standard Package</option>
+
+<option>Premium Package</option>
+
+<option>DJ Booking</option>
+
+</select>
+
+<label for="eventDate">Event Date</label>
+
+<input
+type="date"
+id="eventDate"
+name="eventDate"
+required>
+
+<label for="location">Event Location</label>
+
+<input
+type="text"
+id="location"
+name="location"
+placeholder="Town / Venue"
+required>
+
+<label for="amount">Amount Paid (Le)</label>
+
+<input
+type="number"
+id="amount"
+name="amount"
+placeholder="Enter amount paid"
+required>
+
+<div class="payment-box">
+
+<h3>Orange Money Payment</h3>
+
+<p>
+Orange Money Number:
+<strong>+232 XXX XXX XXX</strong>
+</p>
+
+<p class="note">
+After making payment, enter the transaction reference below.
+</p>
+
+<label for="transactionId">Transaction ID</label>
+
+<input
+type="text"
+id="transactionId"
+name="transactionId"
+placeholder="Enter Orange Money Transaction ID"
+required>
+
+</div>
+
+<label for="notes">Additional Information</label>
+
+<textarea
+id="notes"
+name="notes"
+placeholder="Any additional information..."></textarea>
+
+<button type="submit">
+
+Submit Booking
+
+</button>
+
+</form>
+
+</div>
+
+</body>
+<script>
+
+const API_BASE =
+"https://script.google.com/macros/s/AKfycbzO5EWB-ZKU7cXj8Pb8Dy46OvVjde7OhqxOVdYI8Ude5FyN8Sb9woLsj0l0ylQ5ru3RvQ/exec";
+
+
+document
+.getElementById("bookingForm")
+.addEventListener("submit", async function(event){
+
+    event.preventDefault();
+
+
+    const button = document.querySelector("button");
+
+    button.disabled = true;
+
+    button.textContent = "Submitting...";
+
+
+    const bookingData = {
+
+
+        name:
+        document.getElementById("name").value.trim(),
+
+
+        phone:
+        document.getElementById("phone").value.trim(),
+
+
+        email:
+        document.getElementById("email").value.trim(),
+
+
+        service:
+        document.getElementById("service").value,
+
+
+        package:
+        document.getElementById("package").value,
+
+
+        eventDate:
+        document.getElementById("eventDate").value,
+
+
+        location:
+        document.getElementById("location").value.trim(),
+
+
+        amount:
+        document.getElementById("amount").value,
+
+
+        transactionId:
+        document.getElementById("transactionId").value.trim(),
+
+
+        notes:
+        document.getElementById("notes").value.trim()
+
+    };
+
+
+
+    try {
+
+    console.log("Sending:", bookingData);
+
+    const response = await fetch(API_BASE, {
+        method: "POST",
+        headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(bookingData)
+    });
+
+    const result = await response.json();
+
+    console.log("Response:", result);
+
+    if (result.success) {
+
+        alert(
+            "Booking Successful!\n\n" +
+            "Booking ID: " + result.bookingID +
+            "\nStatus: " + result.status
+        );
+
+        document.getElementById("bookingForm").reset();
+
+    } else {
+
+        alert(
+            "Booking Failed:\n" +
+            (result.error || result.message)
+        );
+
+    }
+
+} catch (error) {
+
+    console.error("Booking Error:", error);
+
+    alert(
+        "Unable to submit booking.\n\n" +
+        error.message
+    );
+
+} finally {
+
+    button.disabled = false;
+    button.textContent = "Submit Booking";
+
+}
+
+
+});
+
+
+</script>
+</html>
