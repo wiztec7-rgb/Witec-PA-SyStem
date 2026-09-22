@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WIZTEC Sound System - Payment & Booking</title>
+
+    <style>
+:root{
+    --navy:#061525;
+    --navy2:#0b2138;
+    --blue:#1d5f96;
+    --cyan:#38bdf8;
+    --green:#25d366;
+    --orange:#f59e0b;
+    --white:#fff;
+    --text:#e5edf6;
+    --muted:#aebdce;
+    --border:rgba(255,255,255,.12);
+    --input:#f8fafc;
+    --input-text:#172033;
+    --shadow:0 25px 70px rgba(0,0,0,.38);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",Arial,Helvetica,sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    padding:40px 18px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:var(--text);
+    background:
+        linear-gradient(135deg,rgba(2,10,20,.92),rgba(4,24,43,.82)),
+        url("Sound1.jpg") center/cover fixed no-repeat;
+}
+
+.container{
+    width:100%;
+    max-width:680px;
+    position:relative;
+    overflow:hidden;
+    padding:42px;
+    background:linear-gradient(145deg,rgba(10,30,50,.97),rgba(4,17,31,.97));
+    border:1px solid var(--border);
+    border-radius:28px;
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+}
+
+.container::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:5px;
+    background:linear-gradient(90deg,var(--cyan),var(--green),var(--orange));
+}
+
+.container::after{
+    content:"";
+    position:absolute;
+    width:240px;
+    height:240px;
+    right:-130px;
+    top:-130px;
+    border-radius:50%;
+    background:rgba(56,189,248,.08);
+    pointer-events:none;
+}
+
+h2{
+    text-align:center;
+    margin-bottom:10px;
+    color:#fff;
+    font-size:clamp(27px,5vw,38px);
+    font-weight:900;
+    letter-spacing:-.025em;
+}
+
+.container > p{
+    text-align:center;
+    max-width:520px;
+    margin:0 auto 30px;
+    color:var(--muted);
+    line-height:1.7;
+    font-size:15px;
+}
+
+form{
+    position:relative;
+    z-index:1;
+}
+
+label{
+    display:block;
+    margin:18px 0 7px;
+    color:#eaf2fb;
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:.01em;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:14px 15px;
+    border:1px solid #d8e0e9;
+    border-radius:12px;
+    background:var(--input);
+    color:var(--input-text);
+    font-size:15px;
+    outline:none;
+    transition:.2s ease;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+input::placeholder,
+textarea::placeholder{
+    color:#8491a2;
+}
+
+input:hover,
+select:hover,
+textarea:hover{
+    border-color:#b7c6d6;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:var(--cyan);
+    box-shadow:0 0 0 4px rgba(56,189,248,.13);
+}
+
+textarea{
+    resize:vertical;
+    min-height:110px;
+}
+
+.payment-box{
+    margin-top:28px;
+    padding:22px;
+    border-radius:18px;
+    background:linear-gradient(145deg,rgba(30,64,94,.72),rgba(10,31,51,.9));
+    border:1px solid rgba(56,189,248,.2);
+    box-shadow:0 12px 30px rgba(0,0,0,.16);
+}
+
+.payment-box h3{
+    margin-bottom:12px;
+    color:#fff;
+    font-size:20px;
+}
+
+.payment-box p{
+    text-align:left;
+    margin:8px 0;
+    color:#d6e2ef;
+    line-height:1.6;
+}
+
+.payment-box strong{
+    color:#fff;
+    font-size:17px;
+}
+
+.note{
+    color:#fbbf24 !important;
+    font-size:13px;
+}
+
+button{
+    width:100%;
+    margin-top:25px;
+    padding:15px 18px;
+    border:0;
+    border-radius:13px;
+    background:linear-gradient(135deg,#f59e0b,#f97316);
+    color:#111827;
+    font-size:16px;
+    font-weight:900;
+    cursor:pointer;
+    box-shadow:0 12px 28px rgba(245,158,11,.22);
+    transition:.25s ease;
+}
+
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 16px 34px rgba(245,158,11,.3);
+    filter:brightness(1.05);
+}
+
+button:disabled{
+    opacity:.7;
+    cursor:not-allowed;
+    transform:none;
+}
+
+@media (max-width:600px){
+    body{
+        padding:20px 12px;
+        align-items:flex-start;
+    }
+
+    .container{
+        margin:10px 0;
+        padding:32px 20px;
+        border-radius:22px;
+    }
+
+    h2{
+        font-size:29px;
+    }
+
+    .container > p{
+        font-size:14px;
+        margin-bottom:24px;
+    }
+
+    .payment-box{
+        padding:18px;
+    }
+}
+
+@media (max-width:400px){
+    .container{
+        padding:28px 16px;
+    }
+
+    input,
+    select,
+    textarea{
+        padding:13px;
+    }
+}
+
+@media (prefers-reduced-motion:reduce){
+    html{
+        scroll-behavior:auto;
+    }
+
+    *{
+        transition:none !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>WIZTEC Sound System</h2>
+
+<p>
+Complete the booking form below and submit your payment information to confirm your booking.
+</p>
+
+<form id="bookingForm">
+
+<label for="name">Full Name</label>
+<input
+type="text"
+id="name"
+name="name"
+placeholder="Enter your full name"
+required>
+
+<label for="phone">Mobile Number</label>
+<input
+type="tel"
+id="phone"
+name="phone"
+placeholder="+232 XX XXX XXXX"
+required>
+
+<label for="email">Email Address</label>
+<input
+type="email"
+id="email"
+name="email"
+placeholder="example@email.com"
+required>
+
+<label for="service">Event Type</label>
+<select
+id="service"
+name="service"
+required>
+
+<option value="">Select Event Type</option>
+
+<option value="Wedding">Wedding</option>
+
+<option value="Birthday Party">Birthday Party</option>
+
+<option value="Church Program">Church Program</option>
+
+<option value="Outdoor Event">Outdoor Event</option>
+
+<option value="Conference">Conference</option>
+
+<option value="Concert">Concert</option>
+
+<option value="Funeral">Funeral</option>
+
+<option value="Other">Other</option>
+
+</select>
+
+<label for="package">Package</label>
+
+<select
+id="package"
+name="package">
+
+<option value="">Select Package</option>
+
+<option>Basic Package</option>
+
+<option>Standard Package</option>
+
+<option>Premium Package</option>
+
+<option>DJ Booking</option>
+
+</select>
+
+<label for="eventDate">Event Date</label>
+
+<input
+type="date"
+id="eventDate"
+name="eventDate"
+required>
+
+<label for="location">Event Location</label>
+
+<input
+type="text"
+id="location"
+name="location"
+placeholder="Town / Venue"
+required>
+
+<label for="amount">Amount Paid (Le)</label>
+
+<input
+type="number"
+id="amount"
+name="amount"
+placeholder="Enter amount paid"
+required>
+
+<div class="payment-box">
+
+<h3>Orange Money Payment</h3>
+
+<p>
+Orange Money Number:
+<strong>+232 72 306 408</strong>
+</p>
+
+<p class="note">
+After making booking payment, enter the transaction reference below.
+</p>
+
+<label for="transactionId">Transaction ID</label>
+
+<input
+type="text"
+id="transactionId"
+name="transactionId"
+placeholder="Enter Orange Money Transaction ID"
+required>
+
+</div>
+
+<label for="notes">Additional Information</label>
+
+<textarea
+id="notes"
+name="notes"
+placeholder="Any additional information..."></textarea>
+
+<button type="submit">
+
+Submit Booking
+
+</button>
+
+</form>
+
+</div>
+
+</body>
+<script>
+
+const API_BASE =
+"https://script.google.com/macros/s/AKfycbzO5EWB-ZKU7cXj8Pb8Dy46OvVjde7OhqxOVdYI8Ude5FyN8Sb9woLsj0l0ylQ5ru3RvQ/exec";
+
+
+document
+.getElementById("bookingForm")
+.addEventListener("submit", async function(event){
+
+    event.preventDefault();
+
+
+    const button = document.querySelector("button");
+
+    button.disabled = true;
+
+    button.textContent = "Submitting...";
+
+
+    const bookingData = {
+
+
+        name:
+        document.getElementById("name").value.trim(),
+
+
+        phone:
+        document.getElementById("phone").value.trim(),
+
+
+        email:
+        document.getElementById("email").value.trim(),
+
+
+        service:
+        document.getElementById("service").value,
+
+
+        package:
+        document.getElementById("package").value,
+
+
+        eventDate:
+        document.getElementById("eventDate").value,
+
+
+        location:
+        document.getElementById("location").value.trim(),
+
+
+        amount:
+        document.getElementById("amount").value,
+
+
+        transactionId:
+        document.getElementById("transactionId").value.trim(),
+
+
+        notes:
+        document.getElementById("notes").value.trim()
+
+    };
+
+
+
+    try {
+
+    console.log("Sending:", bookingData);
+
+    const response = await fetch(API_BASE, {
+        method: "POST",
+        headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(bookingData)
+    });
+
+    const result = await response.json();
+
+    console.log("Response:", result);
+
+    if (result.success) {
+
+        alert(
+            "Booking Successful!\n\n" +
+            "Booking ID: " + result.bookingID +
+            "\nStatus: " + result.status
+        );
+
+        document.getElementById("bookingForm").reset();
+
+    } else {
+
+        alert(
+            "Booking Failed:\n" +
+            (result.error || result.message)
+        );
+
+    }
+
+} catch (error) {
+
+    console.error("Booking Error:", error);
+
+    alert(
+        "Unable to submit booking.\n\n" +
+        error.message
+    );
+
+} finally {
+
+    button.disabled = false;
+    button.textContent = "Submit Booking";
+
+}
+
+
+});
+
+
+</script>
+</html>
