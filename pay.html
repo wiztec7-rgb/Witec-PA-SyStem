@@ -406,6 +406,58 @@ Submit Booking
 </form>
 
 </div>
+    
+<!-- WIZTEC AI CHATBOT -->
+<iframe
+  id="wiztecAIFrame"
+  src="AIChat.html"
+  title="WIZTEC AI Customer Assistant"
+  style="
+    position:fixed;
+    right:15px;
+    bottom:15px;
+    width:76px;
+    height:76px;
+    border:0;
+    z-index:99999;
+    background:transparent;
+  "
+  allow="clipboard-write"
+></iframe>
+
+<script>
+(function() {
+
+  const frame = document.getElementById("wiztecAIFrame");
+
+  window.addEventListener("message", function(event) {
+
+    if (event.origin !== window.location.origin) return;
+
+    if (event.source !== frame.contentWindow) return;
+
+    if (!event.data ||
+        event.data.type !== "WIZTEC_AI_RESIZE") return;
+
+    if (event.data.open === true) {
+
+      frame.style.width = "390px";
+      frame.style.height = "620px";
+
+    } else {
+
+      frame.style.width = "76px";
+      frame.style.height = "76px";
+
+    }
+
+  });
+
+})();
+</script>
+</body>
+</html>
+
 
 </body>
 <script>
